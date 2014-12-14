@@ -49,8 +49,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <cassandraVersion>2.0.3</cassandraVersion>
-    <cassandraDriverVersion>2.0.0-rc2</cassandraDriverVersion>
+    <cassandraVersion>2.1.2</cassandraVersion>
+    <cassandraDriverVersion>2.1.2</cassandraDriverVersion>
     <guavaVersion>17.0</guavaVersion>
     <guiceVersion>4.0-beta4</guiceVersion>
     <jacksonVersion>2.1.4</jacksonVersion>
@@ -60,6 +60,7 @@
     <mockitoVersion>1.9.5</mockitoVersion>
     <slf4jVersion>1.7.3</slf4jVersion>
     <jexlVersion>2.1.1</jexlVersion>
+    <lz4Version>1.2.0</lz4Version>
   </properties>
 
   <dependencyManagement>
@@ -94,11 +95,6 @@
         <artifactId>jackson-databind</artifactId>
         <version>${jacksonVersion}</version>
       </dependency>
-      <dependency>
-        <groupId>com.datastax.cassandra</groupId>
-        <artifactId>cassandra-driver-core</artifactId>
-        <version>${cassandraDriverVersion}</version>
-      </dependency>
 
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -126,6 +122,16 @@
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>${mockitoVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.datastax.cassandra</groupId>
+        <artifactId>cassandra-driver-core</artifactId>
+        <version>${cassandraDriverVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cassandra</groupId>
+        <artifactId>cassandra-all</artifactId>
+        <version>${cassandraVersion}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -222,5 +228,5 @@
       </build>
     </profile>
   </profiles>
-  
+    
 </project>

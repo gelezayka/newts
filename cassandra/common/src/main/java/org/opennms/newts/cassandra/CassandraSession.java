@@ -18,7 +18,7 @@ import com.datastax.driver.core.RegularStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.ShutdownFuture;
+import com.datastax.driver.core.CloseFuture;
 import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.exceptions.DriverException;
 
@@ -59,7 +59,7 @@ public class CassandraSession {
     }
 
     public Future<Void> shutdown() {
-        final ShutdownFuture future = m_session.shutdown();
+        final CloseFuture future = m_session.closeAsync();
 
         return new Future<Void>() {
 
