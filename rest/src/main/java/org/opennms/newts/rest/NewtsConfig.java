@@ -24,7 +24,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yammer.dropwizard.config.Configuration;
+import io.dropwizard.Configuration;
 
 
 public class NewtsConfig extends Configuration {
@@ -45,6 +45,10 @@ public class NewtsConfig extends Configuration {
     @Valid
     @JsonProperty("reports")
     private Map<String, ResultDescriptorDTO> m_reports = Collections.emptyMap();
+
+    @Valid
+    @JsonProperty("authentication")
+    private AuthenticationConfig m_authenticationConfig = new AuthenticationConfig();
 
     public int getMaxSampleProcessorThreads() {
         return m_maxThreads;
@@ -70,8 +74,16 @@ public class NewtsConfig extends Configuration {
         return m_cassandraConfig.getColumnTTL();
     }
 
+    public String getCassandraCompression() {
+        return m_cassandraConfig.getCompression();
+    }
+
     public Map<String, ResultDescriptorDTO> getReports() {
         return m_reports;
+    }
+
+    public AuthenticationConfig getAuthenticationConfig() {
+        return m_authenticationConfig;
     }
 
 }
