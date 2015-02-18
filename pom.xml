@@ -9,7 +9,7 @@
 
   <groupId>org.opennms.newts</groupId>
   <artifactId>newts-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <url>http://newts.io</url>
   <name>Newts</name>
@@ -44,6 +44,7 @@
     <module>examples</module>
     <module>metrics-reporter</module>
     <module>karaf</module>
+    <module>ui</module>
   </modules>
 
   <properties>
@@ -53,7 +54,7 @@
     <cassandraDriverVersion>2.1.2</cassandraDriverVersion>
     <guavaVersion>17.0</guavaVersion>
     <guiceVersion>4.0-beta4</guiceVersion>
-    <jacksonVersion>2.1.4</jacksonVersion>
+    <jacksonVersion>2.3.5</jacksonVersion>
     <junitVersion>4.11</junitVersion>
     <logbackVersion>1.0.10</logbackVersion>
     <metricsVersion>3.0.1</metricsVersion>

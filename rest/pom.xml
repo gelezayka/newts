@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.opennms.newts</groupId>
     <artifactId>newts-parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -34,6 +34,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.opennms.newts</groupId>
+      <artifactId>newts-ui</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
     </dependency>
@@ -47,15 +52,9 @@
       <version>${guiceVersion}</version>
     </dependency>
     <dependency>
-      <groupId>com.yammer.dropwizard</groupId>
+      <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
-      <version>0.6.2</version>
-    </dependency>
-    <!-- Needed for CORS filter -->
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-servlets</artifactId>
-      <version>8.1.10.v20130312</version>
+      <version>0.7.1</version>
     </dependency>
     <dependency>
       <groupId>org.skife.gressil</groupId>
@@ -67,6 +66,16 @@
       <artifactId>args4j</artifactId>
       <version>2.0.29</version>
     </dependency>
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <version>1.1.1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>net.jpountz.lz4</groupId>
+      <artifactId>lz4</artifactId>
+      <version>1.3.0</version>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -77,6 +86,11 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-assets</artifactId>
+      <version>0.7.1</version>
     </dependency>
   </dependencies>
 

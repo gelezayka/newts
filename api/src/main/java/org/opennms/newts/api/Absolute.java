@@ -27,6 +27,11 @@ public class Absolute extends Counter {
     }
 
     @Override
+    public ValueType<UnsignedLong> delta(Number value) {
+        return this;
+    }
+
+    @Override
     public MetricType getType() {
         return MetricType.ABSOLUTE;
     }

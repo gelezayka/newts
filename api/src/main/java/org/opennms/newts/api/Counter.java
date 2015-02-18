@@ -22,7 +22,7 @@ import com.google.common.primitives.UnsignedLong;
 
 
 public class Counter extends ValueType<UnsignedLong> {
-
+    
     private static final long serialVersionUID = 1L;
     private static final UnsignedLong MAX32 = toUnsignedLong(0xFFFFFFFFL);
     private static final UnsignedLong MAX64 = toUnsignedLong(0xFFFFFFFFFFFFFFFFL);
@@ -49,20 +49,18 @@ public class Counter extends ValueType<UnsignedLong> {
 
     @Override
     public ValueType<UnsignedLong> delta(Number value) {
-        UnsignedLong difference = getValue().minus(toUnsignedLong(value));
-
-        if (isNegative(difference)) {
-            UnsignedLong difference32 = difference.plus(MAX32).plus(UnsignedLong.ONE);
-
-            if (isNegative(difference32)) {
-                return new Counter(difference.plus(MAX64).plus(UnsignedLong.ONE));
+        Long difference = longValue() - value.longValue();
+        if (difference < 0) {
+            Long difference32 = difference + 0xFFFFFFFFL + 1;
+            if (difference32 < 0) {
+                return new Counter(toUnsignedLong(difference +  0xFFFFFFFFFFFFFFFFL + 1));
             }
             else {
-                return new Counter(difference32);
+                return new Counter(toUnsignedLong(difference32));
             }
         }
         else {
-            return new Counter(difference);
+            return new Counter(toUnsignedLong(difference));
         }
 
     }
@@ -111,7 +109,7 @@ public class Counter extends ValueType<UnsignedLong> {
         return getValue().doubleValue();
     }
 
-    private static UnsignedLong toUnsignedLong(Number value) {
+    protected static UnsignedLong toUnsignedLong(Number value) {
         if (value instanceof UnsignedLong) return (UnsignedLong) value;
         return UnsignedLong.fromLongBits(value.longValue());
     }
