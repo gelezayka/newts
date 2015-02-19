@@ -15,6 +15,7 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.datastax.driver.core.CloseFuture;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ProtocolOptions.Compression;
@@ -22,7 +23,6 @@ import com.datastax.driver.core.RegularStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.CloseFuture;
 import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.exceptions.DriverException;
 
@@ -51,6 +51,11 @@ public class CassandraSession {
 
         m_session = cluster.connect(keyspace);
 
+    }
+
+    public PreparedStatement prepare(String statement) {
+        try                           {  return m_session.prepare(statement);  }
+        catch (DriverException excep) {  throw new CassandraException(excep);  } 
     }
 
     public PreparedStatement prepare(RegularStatement statement) {

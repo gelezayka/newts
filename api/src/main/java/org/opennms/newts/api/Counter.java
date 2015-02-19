@@ -22,7 +22,7 @@ import com.google.common.primitives.UnsignedLong;
 
 
 public class Counter extends ValueType<UnsignedLong> {
-    
+
     private static final long serialVersionUID = 1L;
     private static final UnsignedLong MAX32 = toUnsignedLong(0xFFFFFFFFL);
     private static final UnsignedLong MAX64 = toUnsignedLong(0xFFFFFFFFFFFFFFFFL);
@@ -49,24 +49,26 @@ public class Counter extends ValueType<UnsignedLong> {
 
     @Override
     public ValueType<UnsignedLong> delta(Number value) {
-        Long difference = longValue() - value.longValue();
-        if (difference < 0) {
-            Long difference32 = difference + 0xFFFFFFFFL + 1;
-            if (difference32 < 0) {
-                return new Counter(toUnsignedLong(difference +  0xFFFFFFFFFFFFFFFFL + 1));
+
+        UnsignedLong previous = toUnsignedLong(value);
+
+        // If previous value is greater-than this one, we've wrapped
+        if (previous.compareTo(getValue()) > 0) {
+            UnsignedLong count32 = getValue().plus(MAX32).plus(UnsignedLong.ONE);
+
+            // Still smaller, this is a 64-bit counter wrap
+            if (previous.compareTo(count32) > 0) {
+                return new Counter(MAX64.minus(previous).plus(getValue()).plus(UnsignedLong.ONE));
             }
+            // Process as 32-bit counter wrap
             else {
-                return new Counter(toUnsignedLong(difference32));
+                return new Counter(MAX32.minus(previous).plus(getValue())).plus(UnsignedLong.ONE);
             }
         }
+        // ...no counter wrap has occurred.
         else {
-            return new Counter(toUnsignedLong(difference));
+            return new Counter(getValue().minus(previous));
         }
-
-    }
-
-    private boolean isNegative(UnsignedLong val) {
-        return val.compareTo(UnsignedLong.ZERO) < 0;
     }
 
     @Override

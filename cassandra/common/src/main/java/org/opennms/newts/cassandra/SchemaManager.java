@@ -96,7 +96,7 @@ public class SchemaManager implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        m_cluster.closeAsync();
+        m_cluster.close();
     }
 
 }
